@@ -8,6 +8,10 @@ import mainBannerImage from '../images/datacenter1.jpg';
 import mainBackgroundImage from '../images/network-cables-494648_1920.jpg';
 import bigLogo from '../images/logo.svg';
 import cableMask from '../images/ethernet_cables.jpeg';
+import cardImage1 from '../images/cabling_banner.png';
+import cardImage2 from '../images/infra_design.png';
+import cardImage3 from '../images/ethernet_fiber_light.jpg';
+import cardImage4 from '../images/pos_design.png';
 
 class FullPageIntroWithFixedNavbar extends React.Component {
   constructor(props) {
@@ -52,16 +56,16 @@ render() {
                   <Collapse isOpen = { this.state.collapse } navbar>
                     <NavbarNav right>
                       <NavItem style={navbar}>
-                          <NavLink style={navLink} to="#">Home</NavLink>
+                          <a style={navLink} href="#home">Home</a>
                       </NavItem>
                       <NavItem style={navbar}>
-                          <NavLink  style={navLink} to="#">Services</NavLink>
+                          <a style={navLink} href="#team">Our Team</a>
                       </NavItem>
                       <NavItem style={navbar}>
-                          <NavLink  style={navLink} to="#">Our Team</NavLink>
+                          <a style={navLink} href="#services">Services</a>
                       </NavItem>
                       <NavItem style={navbar}>
-                          <NavLink  style={navLink} to="#">Contact</NavLink>
+                          <a  style={navLink} href="#contact">Contact</a>
                       </NavItem>
                     </NavbarNav>
                   </Collapse>
@@ -69,15 +73,18 @@ render() {
               </Router>
 
           <View style={mainView}>
+            <div id="home">
             <Mask overlay="black-strong" style={{flexDirection: 'column'}} className="flex-center  text-white text-center">
               <h1>Consistent Quality</h1>
 
             </Mask>
+            </div>
           </View>
         </header>
 
         <main>
           <View style={mainBackground2}>
+            <div id="team">
             <Mask overlay="transparent" style={{flexDirection: 'column'}} className="flex-center  text-white text-center">
               <p className="text-left" style={mainStatement2}>
                 Nconnect is a specialist in the design, installation
@@ -92,14 +99,16 @@ render() {
                 cabling projects to ongoing network infrastructure support.
               </p>
             </Mask>
+            </div>
           </View>
           <View style={mainBackground}>
+            <div id="services"></div>
             <Mask overlay="black-strong" className="flex-center  text-white text-center">
               <View style={cardStack}>
               <div className="d-flex flex-wrap justify-content-center">
                 <div className="p-2">
                 <Card style={cards} cascade>
-                    <CardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" />
+                    <CardImage className="img-fluid" src={cardImage1} />
                     <CardBody>
                         <CardTitle style={cardTitle}>Network Cabling</CardTitle>
                         <CardText>
@@ -114,7 +123,7 @@ render() {
 
                 <div className="p-2">
                 <Card style={cards} cascade>
-                    <CardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" />
+                    <CardImage className="img-fluid" src={cardImage2} />
                     <CardBody>
                         <CardTitle style={cardTitle}>Design and Build</CardTitle>
                         <CardText>
@@ -124,33 +133,36 @@ render() {
                           structured cabling installation or fiber optic design please
                           feel free to contact us for your Free Site Survey!
                         </CardText>
-                        <Button href="#">Button</Button>
+                        <Button href="#">More</Button>
                     </CardBody>
                 </Card>
                 </div>
 
                 <div className="p-2">
                 <Card style={cards} cascade>
-                    <CardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" />
+                    <CardImage className="img-fluid" src={cardImage3} />
                     <CardBody>
                         <CardTitle style={cardTitle}>Voice and data</CardTitle>
                         <CardText>
-                          Some quick example text to build on the card title and make up the bulk of the card's content.
+                          Converged networks and VoIP services – integrating voice, data and video communications (wired or wireless).
+                          Wireless installation and network design: access point, WiFi, RFID, WLAN, Broadband
+                          Wireless / WiFi, WiMax, Point to Point / Point to Multi-Point Wireless, WiFi Hotspots and more.
                         </CardText>
-                        <Button href="#">Button</Button>
+                        <Button href="#">More</Button>
                     </CardBody>
                 </Card>
                 </div>
 
                 <div className="p-2">
                 <Card style={cards} cascade>
-                    <CardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" />
+                    <CardImage className="img-fluid" src={cardImage4} />
                     <CardBody>
                         <CardTitle style={cardTitle}>Existing Cabling Systems</CardTitle>
                         <CardText>
-                          Some quick example text to build on the card title and make up the bulk of the card's content.
+                          Point of sales (POS) systems installation.
+                          Cabling for paging systems and security networks: security camera video surveillance CCTV systems.
                         </CardText>
-                        <Button href="#">Button</Button>
+                        <Button href="#">More</Button>
                     </CardBody>
                 </Card>
                 </div>
