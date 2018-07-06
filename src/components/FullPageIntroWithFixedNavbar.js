@@ -42,6 +42,11 @@ class FullPageIntroWithFixedNavbar extends React.Component {
         },
         form_error: false,
         form_sent: false,
+        errors: {
+          name: false,
+          email: false,
+          message: false,
+        }
       };
 
     this.onClick = this.onClick.bind(this);
@@ -74,25 +79,25 @@ class FullPageIntroWithFixedNavbar extends React.Component {
   }
 
   sendMessage(event) {
-    console.log(event);
     event.preventDefault();
 
-    let show_error = false;
-    // check for name, email, and message values
-    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.form.email)) {
-      show_error = true;
-    }
+    let has_error = false;
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (this.state.form.name == '' || this.state.form.message == '') {
-      show_error = true;
-    }
+    has_error = this.state.form.name === ''
+      || this.state.form.message === ''
+      || !re.test(this.state.form.email);
 
-    // if all valid, make api call
-    if (!show_error) {
-      this.setState(currentState => ({
-        form_error: true,
-      }));
-    }
+    this.setState(
+      {
+        form_error: has_error,
+        errors: {
+          name: this.state.form.name === '',
+          email: !re.test(this.state.form.email),
+          message: this.state.form.message === '',
+        }
+      }
+    );
   }
 
   render() {
@@ -264,6 +269,40 @@ class FullPageIntroWithFixedNavbar extends React.Component {
 
     };
 
+    const errorField = {
+      borderColor: '#ff4444',
+      borderWidth: '2px',
+      backgroundColor: '#ff4444',
+      color: '#fff',
+    };
+
+    const errorText = {
+      textAlign: 'center',
+      color: '#ff4444',
+      fontWeight: '700',
+      fontSize: 16,
+    };
+
+    const validField = {
+      // borderColor: '#34C323',
+      // borderWidth: '2px',
+    }
+
+    const error_display = this.state.form_error
+      ? (<h4 style={errorText}>Please enter valid values in the highlighted fields.</h4>)
+      : false;
+
+    const messageStyle = this.state.errors.message
+      ? errorField
+      : validField;
+
+    const nameStyle = this.state.errors.name
+      ? errorField
+      : validField;
+
+    const emailStyle = this.state.errors.email
+      ? errorField
+      : validField;
 
     return (
       <div className="container-fluid" style={mainContainer}>
@@ -404,9 +443,11 @@ class FullPageIntroWithFixedNavbar extends React.Component {
             <p className="white-text" style={contactText}>
               Choose from a wide range of data cabling solutions, from one-off
               cabling projects to on-going network infrastructure support.
+              <br/><br/>
             </p>
           </Mask>
           <Card style={contactCard}>
+            {error_display}
             <form style={contactForm} onSubmit={this.sendMessage}>
               <label htmlFor="name" className="grey-text">Your name</label>
               <input
@@ -414,6 +455,7 @@ class FullPageIntroWithFixedNavbar extends React.Component {
                 id="name"
                 name="name"
                 className="form-control"
+                style={nameStyle}
                 value={this.state.form.name}
                 onChange={this.handleChange}
               />
@@ -424,6 +466,7 @@ class FullPageIntroWithFixedNavbar extends React.Component {
                 id="email"
                 name="email"
                 className="form-control"
+                style={emailStyle}
                 value={this.state.form.email}
                 onChange={this.handleChange}
               />
@@ -434,6 +477,7 @@ class FullPageIntroWithFixedNavbar extends React.Component {
                 id="message"
                 name="message"
                 className="form-control"
+                style={messageStyle}
                 rows="8"
                 value={this.state.form.message}
                 onChange={this.handleChange}
